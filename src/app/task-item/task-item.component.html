@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="title">To Do:</label>
+    <textarea type="text" id="title" formControlName="title"> </textarea>
+    <div
+      *ngIf="form.controls?.['title']?.touched && form.controls?.['title']?.errors?.['required']"
+      class="error"
+    >
+      Title is required.
+    </div>
+  </div>
+
+  <div>
+    <label for="completed">status:</label>
+    <select id="completed" formControlName="completed">
+      <option [ngValue]="true">Done</option>
+      <option [ngValue]="false">Pending</option>
+    </select>
+  </div>
+
+  <div class="actions">
+    <button type="submit" [disabled]="!form.valid">Update</button>
+    <button type="button" [disabled]="!form.valid" (click)="onDelete()">
+      Delete
+    </button>
+    <button type="button" (click)="onCancel()">Cancel</button>
+  </div>
+</form>
