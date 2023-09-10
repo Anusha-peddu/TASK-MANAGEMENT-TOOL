@@ -1,13 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Task } from '../models/task.model';
-import {
-  Observable,
-  catchError,
-  throwError,
-  map,
-  take,
-} from 'rxjs';
+import { Observable, catchError, throwError, map, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ToDoState } from '../models/todo.state.model';
 import { getAllTasks } from '../store/task.selectors';
@@ -16,7 +10,6 @@ import { getAllTasks } from '../store/task.selectors';
   providedIn: 'root',
 })
 export class TasksService {
-
   private apiURL: string = 'https://jsonplaceholder.typicode.com/todos';
 
   constructor(private http: HttpClient, private store: Store<ToDoState>) {}
@@ -48,14 +41,15 @@ export class TasksService {
     return this.store.select(getAllTasks).pipe(
       take(1),
       map((allTasks: Task[]) => {
-        return allTasks = allTasks.map(task => {
-            const matchingTask = tasksToUpdate.find(updatedTask => updatedTask.id === task.id);
-            if (matchingTask) {
-               
-               return {...matchingTask, completed: true};
-            }
-            return task;
-          });        
+        return (allTasks = allTasks.map((task) => {
+          const matchingTask = tasksToUpdate.find(
+            (updatedTask) => updatedTask.id === task.id
+          );
+          if (matchingTask) {
+            return { ...matchingTask, completed: true };
+          }
+          return task;
+        }));
       })
     );
   }
@@ -77,6 +71,4 @@ export class TasksService {
       })
     );
   }
-
-
 }

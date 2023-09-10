@@ -63,7 +63,6 @@ const materialImports = [
     EffectsModule.forRoot([TaskEffects, RouterEffects]),
     StoreDevtoolsModule.instrument(),
     HttpClientModule,
-    StoreRouterConnectingModule,
     ReactiveFormsModule,
     ...materialImports,
   ],
